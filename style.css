@@ -1,0 +1,629 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: white;
+    font-family: 'Times New Roman', Times, sans-serif;
+}
+
+/* ------------------------------------------ Game box starts---------------------------------- */
+
+.game-box {
+    position: relative;
+    width: 400px;
+    height: 800px;
+    overflow: hidden;
+    border-radius: 40px;
+    background-image: url(brick\ wall\ bkgd.avif);
+    background-color: rgba(255, 255, 255, 0.5);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+}
+
+/* -------------------------------------- Instructions------------------------------------------ */
+
+.instructions{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+	background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+	background-size: 400% 400%;
+	animation: gradient 10s ease infinite;
+    height: 100%;
+}
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
+.topic{
+    z-index: 2;
+    font-size: 40px;
+    padding-bottom: 50px ;
+}
+
+.instructions ul{
+    text-align: left;
+}
+
+.instructions li{
+    padding: 20px ;
+    text-align: left;
+    font-size: 20px;
+}
+
+.playButton{
+    font-size: 40px;
+    padding-top: 70px;
+    cursor: pointer;
+    font-family: 'Coiny', cursive;
+    animation: bounce .4s ease infinite alternate;
+}
+
+
+@keyframes bounce {
+    0% {
+        text-shadow:
+                    0 5px 0 #ccc,
+                    0 2px 3px rgba(0, 0, 0, 1);  
+    }
+    100% {
+      transform:translateY(-20px);
+    }
+}
+
+/* ---------------------------------- Loading Animation ---------------------------------- */
+
+.loading-animation{
+    position: absolute;
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+}
+
+.container-box{
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container-box .ring{
+    position: relative;
+    width: 150px;
+    height: 150px;
+    margin: -30px;
+    border-radius: 50%;
+    border: 4px solid transparent;
+    border-top: 4px solid #24ecff;
+    animation: animate1 4s linear infinite;
+}
+
+@keyframes animate1{
+    0%{
+        transform: rotate(0deg);
+    }
+    100%{
+        transform: rotate(360deg);
+    }
+}
+
+.container-box .ring::before{
+    content: '';
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    border-radius: 50%;
+    width: 15px;
+    height: 15px;
+    background: #24ecff;
+    box-shadow: 0 0 0 5px #24ecff33,
+    0 0 0 10px #24ecff22,
+    0 0 0 20px #24ecff11,
+    0 0 20px #24ecff,
+    0 0 5px #24ecff;
+}
+
+
+.container-box .ring:nth-child(2){
+    animation: animate2 4s linear infinite;
+    animation-delay: -1s;
+    border-top: 4px solid transparent;
+    border-left: 4px solid #93ff2d;
+}
+
+.container-box .ring:nth-child(2)::before{
+    content: '';
+    position: absolute;
+    top: initial;
+    bottom: 12px;
+    left: 12px;
+    border-radius: 50%;
+    width: 15px;
+    height: 15px;
+    background: #93ff2d;
+    box-shadow: 0 0 0 5px #93ff2d33,
+    0 0 0 10px #93ff2d22,
+    0 0 0 20px #93ff2d11,
+    0 0 20px #93ff2d,
+    0 0 5px #93ff2d;
+}
+
+@keyframes animate2{
+    0%{
+        transform: rotate(360deg);
+    }
+    100%{
+        transform: rotate(0deg);
+    }
+}
+
+.container-box .ring:nth-child(3){ 
+    animation: animate2 4s linear infinite;
+    animation-delay: -3s;
+    position: absolute;
+    top: -66.66px;
+    border-top: 4px solid transparent;
+    border-left: 4px solid #e41cf8;
+}
+
+.container-box .ring:nth-child(3)::before{
+    content: '';
+    position: absolute;
+    top: initial;
+    bottom: 12px;
+    left: 12px;
+    border-radius: 50%;
+    width: 15px;
+    height: 15px;
+    background: #e41cf8;
+    box-shadow: 0 0 0 5px #e41cf833,
+    0 0 0 10px #e41cf822,
+    0 0 0 20px #e41cf811,
+    0 0 20px #e41cf8,
+    0 0 5px #e41cf8;
+}
+
+.container-box p{
+    position: absolute;
+    color: white;
+    font-size: 1.5em;
+    font-family: consolas;
+    bottom: -80px;
+    letter-spacing: 0.15em;
+}
+
+.wavy{
+    margin-top: 100px;
+    position: relative;
+}
+
+.wavy-span-style{
+    position: relative;
+    display: inline-block;
+    font-size: 25px;
+    text-transform: uppercase;
+    color: white;
+    padding: 5px;
+    animation: animate3 1s ease-in-out infinite;
+    animation-delay: calc(0.1s * var(--i));
+}
+
+@keyframes animate3 {
+    0% {
+      transform: translateX(0px);
+    }
+  
+    20% {
+      transform: translateX(20px);
+    }
+
+    40%{
+        transform: translateX(-20px);
+    }
+  }
+  
+
+
+/* -----------------------------------puzzle box starts------------------------------ */
+
+.puzzle{
+    position: relative;
+    width: 100%;
+    display: none;
+    z-index: 2;
+}
+
+.lifeHearts{
+    text-align: right;
+    margin: 25px 25px 0px 25px;
+    padding: 0;
+}
+
+.score {
+    text-align: right;
+    margin: 10px 25px 0px 25px;
+    padding: 0px;
+    font-size: 20px;
+}
+
+.puzzleHeading {
+    text-align: center;
+    font-size: 25px;
+    font-weight: 200;
+}
+
+/* ---------------------- Puzzle Middle part ------------------------------- */
+
+.questionBox{
+    position: absolute;
+    top: 130px;
+    left: 150px;
+    font-size: 40px;
+    font-weight: bold;
+    text-align: right;
+}
+
+.num1{
+    padding-left: 15px;
+}
+
+.answerBox{
+    position: absolute;
+    top: 270px;
+    left: 130px;
+    text-align: center;
+    font-size: 100px;
+    font-weight: bolder;
+}
+
+
+/* -------------------------------------- Numberpad ---------------------------------- */
+
+.options {
+    display: block;
+    text-align: center;
+    margin: 0;
+}
+
+.numberpad {
+    border-bottom: 1px solid white;
+    display: inline-block;
+    padding: 20px ;
+    margin: 2px 30px 2px 30px;
+    text-align: bottom;
+    font-size: 30px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.numberpad:hover{
+    background-color: rgba(235, 226, 226, 0.2) ;
+}
+
+.material-icons {
+    border-bottom: none;
+    font-size: 25px;
+    line-height: 2;
+}
+
+
+/* ---------------------------------- animation ----------------------------- */
+
+.animation{
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center; 
+    background: rgba(240, 240, 240, 0.1);
+    border-radius: 50%;
+    padding: 30px 0px 30px 0px;
+    width: 80%;
+    box-shadow: 0 4px 30px rgba(219, 136, 225, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    animation-duration: 3s;
+    animation-iteration-count: 3;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    margin: 10px auto;
+}
+
+.grow{
+    animation-name: grow;
+}
+
+@keyframes grow{
+    from{
+        width: 0%;
+    }
+    to{
+        width: 100%;
+    }
+}
+
+.animation-effect{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.animation-left-col{
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+}
+
+.animation-right-col{
+    display: flex;
+    flex-direction: column;
+    margin-top: 40px;
+    margin-left: -40px;
+}
+
+.container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    -webkit-box-reflect: below 2px linear-gradient(transparent, #0005);
+  }
+  
+.container .box {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    background: linear-gradient(
+      45deg,
+      #ad4dba 10%,
+      transparent 10%,
+      transparent 50%,
+      #ad4dba 50%,
+      #ad4dba 60%,
+      transparent 60%,
+      transparent 100%
+    );
+    background-size: 20px 20px;
+    border-radius: 20px;
+    animation: animate 0.4s linear infinite;
+    transform: rotate(-45deg);
+}
+  
+  @keyframes animate {
+    0% {
+      background-position: 0;
+    }
+    100% {
+      background-position: 40px;
+    }
+  }
+  
+  .containerOne {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    -webkit-box-reflect: below 2px linear-gradient(transparent, #0005);
+  }
+  
+.containerOne .boxOne {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    background: linear-gradient(
+      45deg,
+      #ad4dba 10%,
+      transparent 10%,
+      transparent 50%,
+      #ad4dba 50%,
+      #ad4dba 60%,
+      transparent 60%,
+      transparent 100%
+    );
+    background-size: 20px 20px;
+    border-radius: 20px;
+    animation: animate4 0.4s linear infinite;
+    transform: rotate(-45deg);
+}
+  
+  @keyframes animate4 {
+    0% {
+      background-position: 0;
+    }
+    100% {
+      background-position: 40px;
+    }
+  }
+
+
+/* -------------------------------- drizzling rain ---------------------------------------- */
+  
+
+.bubblesSection{
+    position: absolute;
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+    z-index: -1;
+    display: flex;
+    bottom: -50%;
+}
+
+.bubblesContainer{
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+}
+
+.bubbles{
+    position: relative;
+    display: flex;
+}
+
+.bubbles span{
+    position: relative;
+    width: 30px;
+    height: 30px;
+    background-color: #4fc3dc;
+    margin: 0 4px;
+    border-radius: 50%;
+    box-shadow: 0 0 0 10px #4fc3dc44,
+    0 0 50px #4fc3dc,
+    0 0 100px #4fc3dc ;
+    animation: animate5 15s linear infinite; 
+    animation-duration: calc(125s /var(--i));
+}
+
+.bubbles span:nth-child(even){
+    background: #ff2d75;
+    box-shadow: 0 0 0 10px #ff2d7544,
+    0 0 50px #ff2d75,
+    0 0 100px #ff2d75;
+}
+
+@keyframes animate5{
+    0%{
+        transform: translateY(100vh) scale(0);
+    }
+    100%{
+        transform: translateY(-10vh) scale(0.2);
+    }
+}
+
+
+
+/* ------------------------------------------------- result- ------------------------------------- */
+
+.resultPage{
+    background-image: url(resultpage-bk.webp);
+    display: none;
+}
+
+.grid-css{
+    position: relative;
+    height: 100vh;
+    display: grid;
+    place-items: center;
+}
+
+.result-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: -660px;
+}
+
+.result-container .hexagon{
+    position: relative;
+    width: 200px;
+    height: 250px;
+    margin-top: -50px;
+    clip-path: polygon(0 25%, 50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%);
+    background: rgb(125, 58, 226);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    animation: leaves 2s ease-in 0.5;
+}
+
+@keyframes leaves{
+    0%{
+        transform: scale(0);
+    }
+    100%{
+        transform: scale(1);
+    }
+}
+
+.result-container .hexagon img{
+    width: 70%;
+    align-items: center;
+}
+
+.scoreBoard{
+    position: absolute;
+    display: inline-block;
+    color: white;
+    padding: 10px;
+    top: 330px;
+    text-align: center;
+}
+
+
+.review-board{
+    font-size: 25px;
+    font-weight: bolder;
+    color: white;
+    padding: 10px;
+    animation-delay: 3s;
+    animation: review 2s ease-in 1;
+    text-transform: capitalize;
+}
+
+.score-div{
+    font-size: 25px;
+    font-weight: bolder;
+    padding: 10px;
+    animation-delay: 4s;
+    animation: review 2s ease-in 1;
+}
+
+@keyframes review{
+    0%{
+        transform: scale(0);
+    }
+    100%{
+        transform: scale(1);
+    }
+}
+
+.replayButton{
+    cursor: pointer;
+    margin-top: 100px;
+    animation-delay: 6s;
+    font-size: 25px;
+    animation: review 2s ease-in 1;
+    text-shadow: 0px 3px 2px #ccc, 
+               0px 8px 10px rgba(0,0,0,0.15), 
+               0px 12px 2px rgba(0,0,0,0.7);
+        
+}
+
+.homePageButton{
+    cursor: pointer;
+    margin-top: 50px;
+    font-size: 25px;
+    animation-delay: 6s;
+    animation: review 2s ease-in 1;
+    text-shadow: 0px 3px 2px #ccc, 
+               0px 8px 10px rgba(0,0,0,0.15), 
+               0px 12px 2px rgba(0,0,0,0.7);
+        
+}
+

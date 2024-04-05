@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elevate - Game</title>
+    <link href="style.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+      integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+      crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Coiny" rel="stylesheet">
+</head>
+
+<body>
+    <section class="game-box" id="gameBox">
+        <section class="instructions" id="instructions">
+            <h1 class="topic">DIFFERENCE</h1>
+            <ul>
+                <li>You will be provided a two numbers to subtract</li>
+                <li>Do the math and find the difference</li>
+                <li>There will be a numberpad</li>
+                <li>Click the number from the numberpad and fill your answer</li>
+                <li>There are only three lives and for each wrong answer a life gets reduced</li>
+            </ul>
+            <p class="playButton" id="playButton">Play!</p>
+        </section>
+        <section class="loading-animation" id="loading-animation" style="display: none;">
+            <div class="container-box">
+                <div class="ring"></div>
+                <div class="ring"></div>
+                <div class="ring"></div>
+            </div>
+            <div class="wavy">
+                <span class="wavy-span-style" style="--i: 1;">L</span>
+                <span class="wavy-span-style" style="--i: 2;">o</span>
+                <span class="wavy-span-style" style="--i: 3;">a</span>
+                <span class="wavy-span-style" style="--i: 4;">d</span>
+                <span class="wavy-span-style" style="--i: 5;">i</span>
+                <span class="wavy-span-style" style="--i: 6;">n</span>
+                <span class="wavy-span-style" style="--i: 7;">g</span>
+                <span class="wavy-span-style" style="--i: 8;">.</span>
+                <span class="wavy-span-style" style="--i: 9;">.</span>
+                <span class="wavy-span-style" style="--i: 10;">.</span>
+            </div>
+        </section>
+        <section class="puzzle" id="puzzle">
+            <div class="puzzleTop">
+                <div class="lifeHearts" id="lifeHearts">❤️❤️❤️</div>
+                <div class="score"><span id="questionCount">1/7</span></div>
+            </div>
+            <div class="animation">
+                <p class="puzzleHeading">Find the difference</p>
+                <div class="animation-effect">
+                    <div class="animation-left-col">
+                        <div class="container">
+                            <div class="box" style="--i:1;"></div>
+                        </div>
+                        <div class="containerOne">
+                            <div class="boxOne" style="--i:1;"></div>
+                        </div>
+                    </div>
+                    <div class="animation-right-col">
+                        <div class="container">
+                            <div class="box" style="--i:1;"></div>
+                        </div>
+                        <div class="containerOne">
+                            <div class="boxOne" style="--i:1;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="questionBox" id="questionBox">
+                <p class="num1" id="num1"></p>
+                <p id="num2"></p>
+            </div>
+            <div class="answerBox" id="answerBox"></div>
+            <div class="options" id="options">
+                <span class="numberpad" onclick="appendToAnswerBox(1)">1</span>
+                <span class="numberpad" onclick="appendToAnswerBox(2)">2</span>
+                <span class="numberpad" onclick="appendToAnswerBox(3)">3</span><br>
+                <span class="numberpad" onclick="appendToAnswerBox(4)">4</span>
+                <span class="numberpad" onclick="appendToAnswerBox(5)">5</span>
+                <span class="numberpad" onclick="appendToAnswerBox(6)">6</span><br>
+                <span class="numberpad" onclick="appendToAnswerBox(7)">7</span>
+                <span class="numberpad" onclick="appendToAnswerBox(8)">8</span>
+                <span class="numberpad" onclick="appendToAnswerBox(9)">9</span><br>
+                <span class="numberpad material-icons" onclick="removeLastDigit()">backspace</span>
+                <span class="numberpad" onclick="appendToAnswerBox(0)">0</span>
+                <span class="numberpad material-icons" onclick="checkAnswer()">done</span>
+            </div>
+            <section class="bubblesSection">
+                <div class="bubblesContainer">
+                    <div class="bubbles">
+                        <span style="--i:11"></span>
+                        <span style="--i:12"></span>
+                        <span style="--i:24"></span>
+                        <span style="--i:10"></span>
+                        <span style="--i:14"></span>
+                        <span style="--i:23"></span>
+                        <span style="--i:18"></span>
+                        <span style="--i:16"></span>
+                        <span style="--i:19"></span>
+                        <span style="--i:20"></span>
+                        <span style="--i:22"></span>
+                        <span style="--i:25"></span>
+                        <span style="--i:18"></span>
+                        <span style="--i:21"></span>
+                        <span style="--i:15"></span>
+                        <span style="--i:13"></span>
+                        <span style="--i:26"></span>
+                        <span style="--i:17"></span>
+                        <span style="--i:13"></span>
+                        <span style="--i:28"></span>
+                    </div>
+                </div>
+            </section>
+        </section >
+        <section class="resultPage" id="resultPage" style="display: none;">
+            <div class="grid-css">
+            <div class="result-container">
+                <div class="hexagon">
+                    <img src="result_logo.png">
+                </div>
+            </div>
+            <div class="scoreBoard">
+                <div class="review-board" id="reviewBoard">
+                    GOOD JOB
+                </div>
+                <div class="score-div" id="scoreDiv"></div>
+                <p class="replayButton" id="replay">Replay</p>
+                <p class="homePageButton" id="homepage">Home</p>
+            </div>
+            
+        </div>
+        </section>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
